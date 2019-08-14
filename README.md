@@ -1,1 +1,1 @@
-# hate-speech-moderation-app
+# hate-speech-moderation-app makes use of a hate speech detection machine learning model that was created by the same team and can be found in the reposotory at https://github.com/kdzumba/lab-project.git. 
