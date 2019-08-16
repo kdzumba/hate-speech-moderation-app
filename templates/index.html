@@ -1,22 +1,26 @@
-{% extends "bootstrap/base.html" %}
+<!DOCTYPE html>
+<html lang="en">
 
-{%block body%}
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{{url_for('static', filename='css/main.css')}}"> {% extends "bootstrap/base.html" %} {%block body%}
 
-<body class="bg-primary">
+    <body class="bg-primary">
 
-    <div class="container text-center">
-        <section>
-            <h2>Chitter</h2>
-        </section>
+        <div class="container text-center">
+            <section>
+                <h2>Chitter</h2>
+            </section>
 
-        <form class="form-group row" action="/">
-            <div class="col-xs-8 col-xs-offset-2">
-                <input type="text" class="form-control inputfield" id="cheep" placeholder="Cheep" name="cheep">
-            </div>
-            <button type="submit" class="btn btn-success ">Cheep</button>
-        </form>
-    </div>
-
+            <form class="form-group row" action="/">
+                <div class="col-xs-8 col-xs-offset-2">
+                    <input type="text" class="form-control inputfield" id="cheep" placeholder="Cheep" name="cheep">
+                </div>
+                <button type="submit" class="btn btn-success ">Cheep</button>
+            </form>
+        </div>
+</head>
 </body>
 
+</html>
 {%endblock%}
