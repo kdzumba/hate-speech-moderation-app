@@ -1,3 +1,11 @@
+from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
+from nltk.tokenize import word_tokenize
+import pickle
+import pandas as pd
+from sklearn.feature_extraction.text import CountVectorizer
+from sklearn.feature_extraction.text import TfidfTransformer
+
+
 def term_frequency(text):
 
     text = text.lower()
