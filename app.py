@@ -3,10 +3,15 @@ from flask_bootstrap import Bootstrap
 import pandas as pd
 import features
 from joblib import load
+import logging
+import sys
 
 
 app = Flask(__name__)
 Bootstrap(app)
+
+app.logger.addHandler(logging.StreamHandler(sys.stdout))
+app.logger.setLevel(logging.ERROR)
 
 model = load("model.joblib")
 
