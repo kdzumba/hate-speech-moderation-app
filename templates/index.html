@@ -1,9 +1,16 @@
 {% extends "bootstrap/base.html" %}
 
+{% block head %}
+
 {% block styles%}
 {{super()}}
 <link href="{{url_for('static', filename='css/main.css')}}" rel="stylesheet">
 {% endblock%}
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+{% endblock%}
+
 
 {%block body%}
 
@@ -31,10 +38,14 @@
             <div class="col-xs-6">
 
                 <form action="/">
-                    <textarea class="form-control" placeholder="What's on your mind" rows="1"
-                        id="tweet-section"></textarea>
+                    <textarea class="form-control" placeholder="What's on your mind" rows="1" id="tweet-section" ,
+                        name="post"></textarea>
                     <button class="form-submit-button btn-primary" type="submit">Post</button>
                 </form>
+
+                {%if prediction%}
+                <h3>prediction</h3>
+                {%endif%}
 
             </div>
 
