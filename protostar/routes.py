@@ -8,7 +8,7 @@ from protostar.forms import RegistrationForm, LoginForm
 from protostar.database import User, Post
 from protostar import app, db, bcrypt
 
-model = load("model.joblib")
+model = load("protostar/model.joblib")
 
 
 @app.route("/register", methods=["POST", "GET"])

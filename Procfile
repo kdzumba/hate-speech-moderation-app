@@ -1,1 +1,1 @@
-web: gunicorn --chdir protostar __init__.py:app
+web: gunicorn run.py:app
