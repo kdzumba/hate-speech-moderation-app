@@ -93,6 +93,7 @@ def term_frequency(text):
         "mohammedan": 0.5,
         "lesbo": 0.5,
         "barbaric": 0.7,
+        "barbarics": 0.7,
         "barbarians": 0.8,
         "barbarian": 0.8,
         "ape": 0.4,
@@ -174,7 +175,7 @@ def term_frequency(text):
 
 def get_tfidf_scores(text):
 
-    with open("tfidf_vocab.pickle", "rb") as f:
+    with open("protostar/tfidf_vocab.pickle", "rb") as f:
         vocab = pickle.load(f)
 
         dic = {"tweet": text}

@@ -18,8 +18,14 @@
     text-shadow:none;
 }
 
-#tweet-section{
-    border-radius: 20px;
+.content-area{
+    background-color: #eee;
 }
 
+.img-responsive {
+    height: auto;
+    width: auto;
+    max-height: 70px;
+    max-width: 100px;
+}
 
