@@ -1,0 +1,29 @@
+{%extends "layout.html"%}
+
+{%block head%}
+{{super()}}
+{%endblock%}
+
+
+{%block navbar%}
+{{super()}}
+{%endblock navbar%}
+
+{%block content%}
+{{super()}}
+<br>
+<div>
+    <form action="/" method="POST">
+        <textarea style="border-radius: 20px;" class="form-control" placeholder="What's on your mind" rows="1" ,
+            name="post"></textarea>
+        <button class="form-submit-button" type="submit">Post</button>
+    </form>
+
+    <br>
+
+    <div id="prediction">
+        <h6>Post: {{post}}</h6>
+        <h6>Hate level: {{prediction}}</h6>
+    </div>
+</div>
+{%endblock content%}
