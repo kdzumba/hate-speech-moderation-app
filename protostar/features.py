@@ -1,10 +1,12 @@
 from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
 from nltk.tokenize import word_tokenize
 import pickle
+import nltk
 import pandas as pd
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.feature_extraction.text import TfidfTransformer
 
+nltk.download('punkt')
 
 def term_frequency(text):
 
