@@ -31,7 +31,7 @@
 
 
 body {
-    background: #bdb1b1;
+    background-color: #ffffff;
     color: #333333;
     margin-top: 5rem;
   }
@@ -57,11 +57,12 @@ body {
   }
   
   .content-section {
-    background: #eee8e8;
+    background: #ffffff;
     padding: 10px 20px;
     border: 1px solid #dddddd;
     border-radius: 3px;
     margin-bottom: 20px;
+    border-radius: 20px;
   }
   
   .article-title {
