@@ -1,5 +1,4 @@
 import secrets
-import jsonify
 from PIL import Image
 import os
 from flask import render_template, url_for, request, redirect, flash, abort, jsonify
