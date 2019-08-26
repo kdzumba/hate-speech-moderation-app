@@ -1,16 +1,8 @@
 import secrets
+import jsonify
 from PIL import Image
 import os
-from flask import (
-    render_template,
-    url_for,
-    request,
-    redirect,
-    flash,
-    redirect,
-    request,
-    abort,
-)
+from flask import render_template, url_for, request, redirect, flash, abort, jsonify
 import pandas as pd
 import protostar.features as features
 from joblib import load
@@ -23,32 +15,44 @@ from protostar import app, db, bcrypt
 model = load("protostar/model.joblib")
 
 
+def predict(post):
+
+    sen_feature = pd.DataFrame(features.get_sentiment_score(post), index=[0])
+    dic_feature = pd.DataFrame(features.term_frequency(post), index=[0])
+    tfidf_feature = features.get_tfidf_scores(post)
+
+    post_df = sen_feature.merge(dic_feature, left_index=True, right_index=True)
+    post_df = post_df.merge(dic_feature, left_index=True, right_index=True)
+    post_df = post_df.merge(tfidf_feature, left_index=True, right_index=True)
+
+    prediction = model.predict_proba(post_df)
+
+    return prediction[0][1]
+
+
 @app.route("/", methods=["POST", "GET"])
+@login_required
 def home():
     posts = Post.query.all()
+    screened = False
 
     if request.method == "POST":
+
         content = request.form.get("post")
+        action = request.form.get("action")
 
-        if content != None:
-
-            sen_feature = pd.DataFrame(features.get_sentiment_score(content), index=[0])
-            dic_feature = pd.DataFrame(features.term_frequency(content), index=[0])
-            tfidf_feature = features.get_tfidf_scores(content)
-
-            post_df = sen_feature.merge(dic_feature, left_index=True, right_index=True)
-            post_df = post_df.merge(dic_feature, left_index=True, right_index=True)
-            post_df = post_df.merge(tfidf_feature, left_index=True, right_index=True)
-
-            prediction = model.predict_proba(post_df)
-
-            post = Post(
-                content=content, author=current_user, hate_level=prediction[0][1]
+        if action == "detect":
+            hate_level = round(predict(content), 4) * 100
+            return render_template(
+                "home.html", posts=posts, hate_level=hate_level, screened=True, post=content
             )
+
+        elif action == "post":
+            hate_level = round(predict(content), 4) * 100
+            post = Post(content=content, author=current_user, hate_level=hate_level)
             db.session.add(post)
             db.session.commit()
-            flash("Your post has been created! ", "success")
-
+            
             return redirect(url_for("home"))
 
     else:
@@ -154,4 +158,4 @@ def update_post(post_id):
     if post.author != current_user:
         abort(403)
     form = PostForm()
-    return render_template("post.html", post=post)
+    return render_template("post_update.html", post=post, form=form)

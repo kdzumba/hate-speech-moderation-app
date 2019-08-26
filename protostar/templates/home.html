@@ -4,6 +4,22 @@
 {{super()}}
 {%endblock%}
 
+{%block scripts%}
+{{super()}}
+<script>
+    function disablePostButton() {
+        document.getElementById("post-button").setAttribute("disabled", true)
+    }
+
+    function disableDetectButton() {
+        document.getElementById("detect-button").setAttribute("disabled", true)
+    }
+    function enableDetectButton() {
+        document.getElementById("detect-button").setAttribute("disabled", false)
+    }
+</script>
+{%endblock scripts%}
+
 
 {%block navbar%}
 {{super()}}
@@ -13,12 +29,33 @@
 {{super()}}
 <br>
 <div>
-    <form action="/" method="POST">
-        <textarea style="border-radius: 20px;" class="form-control" placeholder="What's on your mind" rows="1" ,
-            name="post"></textarea>
-        <button class="form-submit-button" type="submit">Post</button>
+    <form id="post-form" action="/" method="POST">
+        <textarea style="border-radius: 20px;" class="form-control" placeholder="What's on your mind" name="post"
+            id="text-area"></textarea>
+        <button class="form-submit-button" type="submit" name="action" value="post" id="post-button">Post</button>
+        <button class="form-submit-button" type="submit" name="action" value="detect" id="detect-button">Detect</button>
     </form>
 
+    <input type="text" value="{{post}}" id="dummy-input">
+
+    <h5 id="hate-level">Hate level: {{hate_level}}%</h5>
+
+    {%if not screened%}
+    <script>
+        $("#dummy-input").hide()
+        disablePostButton()
+    </script>
+    {%else%}
+    <script>
+        $("#dummy-input").hide()
+        $("#text-area").val($("#dummy-input").val())
+        $("#text-area").change(function () {
+            disablePostButton()
+        })
+    </script>
+    {%endif%}
+
+    <br>
     <br>
 
     {%for post in posts%}

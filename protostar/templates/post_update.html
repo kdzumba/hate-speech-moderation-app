@@ -1,0 +1,23 @@
+{%extends "layout.html"%}
+
+{%block head%}
+{{super()}}
+{%endblock%}
+
+
+{%block navbar%}
+{{super()}}
+{%endblock navbar%}
+
+{%block content%}
+{{super()}}
+<br>
+<div>
+    <form action="/" method="POST">
+        <textarea style="border-radius: 20px;" class="form-control" placeholder="{{post.content}}" rows="1" ,
+            name="post"></textarea>
+        <button class="form-submit-button" type="submit">Post</button>
+    </form>
+</div>
+</div>
+{%endblock content%}

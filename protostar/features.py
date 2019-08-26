@@ -170,7 +170,7 @@ def term_frequency(text):
         hate_count = hate_count + count
         dict_features[dic_term] = count * dictionary[dic_term]
 
-    dict_features["weight"] = hate_count / len(text)
+    dict_features["weight"] = hate_count / (len(text) + 1)
 
     return dict_features
 
