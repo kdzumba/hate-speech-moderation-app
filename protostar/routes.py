@@ -43,7 +43,11 @@ def home():
         if action == "detect":
             hate_level = round(predict(content), 4) * 100
             return render_template(
-                "home.html", posts=posts, hate_level=hate_level, screened=True, post=content
+                "home.html",
+                posts=posts,
+                hate_level=hate_level,
+                screened=True,
+                post=content,
             )
 
         elif action == "post":
@@ -51,7 +55,7 @@ def home():
             post = Post(content=content, author=current_user, hate_level=hate_level)
             db.session.add(post)
             db.session.commit()
-            
+
             return redirect(url_for("home"))
 
     else:
@@ -129,12 +133,15 @@ def account():
 
         current_user.username = form.username.data
         current_user.email = form.email.data
+        current_user.hate_level = form.hate_level.data
+
         db.session.commit()
         flash("Account updated!", "success")
         return redirect(url_for("account"))
     elif request.method == "GET":
         form.username.data = current_user.username
         form.email.data = current_user.email
+        form.hate_level.data = current_user.hate_level
 
     image_file = url_for(
         "static", filename="images/profile_pics/" + current_user.image_file

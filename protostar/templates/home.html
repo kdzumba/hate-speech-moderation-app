@@ -59,20 +59,23 @@
     <br>
 
     {%for post in posts%}
+    {%if post.hate_level <= current_user.hate_level%}
     <article class="media content-section">
         <img class="rounded-circle article-img"
             src="{{url_for('static', filename = 'images/profile_pics/' + post.author.image_file)}}">
         <div class="media-body">
             <div class="article-metadata">
-                <a class="mr-2" href="#">{{post.author.username}}</a>
+                <a class="mr-2"><b>{{post.author.username}}</b></a>
                 <small class="text-muted">{{post.date_posted.strftime('%Y-%m-%d')}}</small>
+                <p class="article-content" style="font-family:Sans-serif; font-size: 14px;">{{post.content}}</p>
             </div>
         </div>
 
         <div>
-            <h6 class="article-content">{{post.content}}</h6>
+
         </div>
     </article>
+    {%endif%}
     {%endfor%}
 </div>
 </div>

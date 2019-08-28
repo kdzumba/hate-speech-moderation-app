@@ -1,5 +1,18 @@
 {%extends "layout.html"%}
 
+{%block scripts%}
+{{super()}}
+
+<script>
+    function outputUpdate(hate_level) {
+        document.querySelector('#selected-hate_level').value = hate_level;
+    }
+</script>
+
+{%endblock scripts%}
+
+
+
 {%block content%}
 {{super()}}
 
@@ -46,6 +59,15 @@
         </div>
 
         <div class="form-group">
+            <p>
+                {{ form.hate_level.label }}:
+                {{ form.hate_level(min=0, max=100, oninput="outputUpdate(value)") }}
+                <output for="hate_level" id="selected-hate_level">{{ form.hate_level.data }}</output>
+            </p>
+        </div>
+
+
+        <div class="form-group">
             {{form.picture.label()}}
             {{form.picture(class = "form-control-file")}}
             {%if form.picture.errors %}
@@ -54,6 +76,7 @@
             {%endfor%}
             {%endif%}
         </div>
+
     </fieldset>
     <div class="form-group">
         {{form.submit(class="btn btn-info")}}
