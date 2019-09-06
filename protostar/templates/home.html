@@ -29,11 +29,19 @@
 {{super()}}
 <br>
 <div>
+<<<<<<< HEAD
     <form id="post-form" action="/" method="POST">
         <textarea style="border-radius: 20px;" class="form-control" placeholder="What's on your mind" name="post"
             id="text-area"></textarea>
         <button class="form-submit-button" type="submit" name="action" value="post" id="post-button">Post</button>
         <button class="form-submit-button" type="submit" name="action" value="detect" id="detect-button">Detect</button>
+=======
+    <form action="/" method="POST">
+        <textarea style="border-radius: 20px;" class="form-control" placeholder="What's on your mind" rows="1" ,
+            name="post"></textarea>
+        <button class="form-submit-button" type="submit">Post</button>
+        <button class="form-submit-button" type="submit">Detect</button>
+>>>>>>> 4ca4a3b5df2a654514cc41b3e70f0f67bddf9e53
     </form>
 
     <input type="text" value="{{post}}" id="dummy-input">
